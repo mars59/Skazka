@@ -9,9 +9,17 @@
 # Copyright:   (c) Сергей 2017
 # Licence:     Open Source
 #-------------------------------------------------------------------------------
+from Bukovica   import *
+from Personazhi import *
 
 def main():
     print('Проект просто "Сказка"')
+    # a = Азбука()
+    # a.изображение = 'Сто'
+    # print(a.изображение)
+    a = Азъ()
+    b = Боги()
+    k = Кащей()
 
 if __name__ == '__main__':
     main()
