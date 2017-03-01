@@ -30,3 +30,6 @@ class Кащей(Персона):
     def __init__(self):
         self.имя = 'Кащей бессмертный'
         Персона.__init__(self)
+        # super().__init__(self)
+
+

@@ -17,12 +17,12 @@ def main():
     print('Проект просто "Сказка"')
     print('PYQT_VERSION = ', QtCore.PYQT_VERSION_STR)
     print('QT_VERSION = ', QtCore.QT_VERSION_STR)
-    # a = Азбука()
-    # a.изображение = 'Сто'
-    # print(a.изображение)
-    # a = Азъ()
-    # b = Боги()
-    # k = Кащей()
+    a = Азбука()
+    a.изображение = 'Сто'
+    print(a.изображение)
+    a = Азъ()
+    b = Боги()
+    k = Кащей()
 
 if __name__ == '__main__':
     main()
