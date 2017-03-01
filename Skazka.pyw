@@ -31,7 +31,7 @@ class Widget(QWidget):
 def main():
     app = QApplication(sys.argv)
     w = Widget()
-    w.resize(250, 150)
+    w.resize(300, 300)
     w.move(300, 300)
     w.setWindowTitle('Квадрат Малевича')
     w.show()
