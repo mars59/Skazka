@@ -18,7 +18,8 @@ from Bukovica   import *
 import sys
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtGui import QPixmap
-
+from PyQt5.QtGui import QIcon
+from PyQt5.Qt import QSize
 app = QtWidgets.QApplication(sys.argv)  # Создаем объект приложения
 window = QtWidgets.QWidget()  # Создаем объект окна
 window.setWindowTitle("Буквы азбуки Буквица")
@@ -66,11 +67,13 @@ positions = [(i,j) for i in range(7) for j in range(7)]
 obj = ClassButtonClick()
 p = 0
 for position, name in zip(positions, names):
-    button = QtWidgets.QPushButton(name)
+    # button = QtWidgets.QPushButton(name)
+    button = QtWidgets.QPushButton()
     p += 1
     s = str(p)
     button.objectName = s
-    # button.icon()
+    button.setIcon(QIcon('Оук.png'))
+    button.setIconSize(QSize(20,20))
     button.setCheckable(True)
     # button.resize(button.sizeHint()) # Метод sizeHint() дает рекомендуемый размер для кнопки.
     button.setToolTip(name)
