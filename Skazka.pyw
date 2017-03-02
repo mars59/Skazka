@@ -33,7 +33,8 @@ lblPicture = QtWidgets.QLabel()
 lblPicture.setPixmap(pixmap)
 lblGuide = QtWidgets.QLabel("<center>Что мы знаем об азбуке Буквица?")
 textBrowser = QtWidgets.QTextBrowser()
-textBrowser.append(азбука.описание)
+
+textBrowser.append(азбука.описание_азбуки)
 
 vbox = QtWidgets.QVBoxLayout()
 vbox.addWidget(btnQuit)
