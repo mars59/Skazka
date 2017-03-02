@@ -22,7 +22,7 @@ from PyQt5.QtGui import QPixmap
 app = QtWidgets.QApplication(sys.argv)  # Создаем объект приложения
 window = QtWidgets.QWidget()  # Создаем объект окна
 window.setWindowTitle("Азбука Буквица")
-window.resize(300, 300)  # Задаем минимальные размеры (клиентской области) окна (ширина и высота)
+window.resize(300, 500)  # Задаем минимальные размеры (клиентской области) окна (ширина и высота)
 
 азбука = Азбука()
 

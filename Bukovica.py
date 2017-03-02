@@ -11,6 +11,8 @@
 #-------------------------------------------------------------------------------
 
 """
+Руский язык – изменение Буквицы
+http://fizrazvitie.ru/2011/03/russkij-yazyk-izmenenie-bukvicy.html
 Древлесловенская Буквица
 http://derzhavarus.ru/bukvica-tablica.html
 Древнеруский язык
