@@ -10,41 +10,41 @@
 # Licence:     Open Source
 #-------------------------------------------------------------------------------
 
-# pyuic5.bat AzbukaWidget.ui -o ui_AzbukaWidget.py
-
-from Bukovica   import *
-# from Personazhi import *
-
 import sys
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap
 
 app = QtWidgets.QApplication(sys.argv)  # Создаем объект приложения
 window = QtWidgets.QWidget()  # Создаем объект окна
-window.setWindowTitle("Азбука Буквица")
+window.setWindowTitle("Макет программы Сказка. Навигация.")
 window.resize(300, 500)  # Задаем минимальные размеры (клиентской области) окна (ширина и высота)
 
-азбука = Азбука()
+btnQuit = QtWidgets.QPushButton("&Закрыть окно")  # Создаем объект кнопки; Alt+З - горячая клавиша
 
-btnQuit = QtWidgets.QPushButton("&Закрыть окно", window)  # Создаем объект кнопки; Alt+З - горячая клавиша
-labTitle = QtWidgets.QLabel("<center>Азбука Буквица")
-pixmap = QPixmap(азбука.файл_c_изображением)
-lblPicture = QtWidgets.QLabel()
-lblPicture.setPixmap(pixmap)
-lblGuide = QtWidgets.QLabel("<center>Что мы знаем об азбуке Буквица?")
-textBrowser = QtWidgets.QTextBrowser()
+btnQuit.clicked.connect(app.quit)  # Завершение выполнения программы
 
-textBrowser.append(азбука.описание_азбуки)
+pixmap1 = QPixmap('Азбука.png')
+lblPicture1 = QtWidgets.QLabel()
+lblPicture1.setPixmap(pixmap1)
+
+pixmap2 = QPixmap('Буквы.png')
+lblPicture2 = QtWidgets.QLabel()
+lblPicture2.setPixmap(pixmap2)
+
+tab = QtWidgets.QTabWidget()
+tab.addTab(lblPicture1, "Азбука")
+tab.addTab(lblPicture2, "Буквы")
+tab.addTab(QtWidgets.QLabel("<center>Здесь будут создаваться слова с помощью клавиатуры"), "Клавиатура")
+tab.addTab(QtWidgets.QLabel("<center>Здесь будут создаваться и настраиваться персонажи"), "Персонажи")
+tab.addTab(QtWidgets.QLabel("<center>Здесь персонажи будут взаимодействовать в смысловом поле"), "Сказка")
+tab.addTab(QtWidgets.QLabel("<center>Здесь будет какая-нибудь мини игра"), "Мини игра")
+tab.setCurrentIndex(0)
 
 vbox = QtWidgets.QVBoxLayout()
 vbox.addWidget(btnQuit)
-vbox.addWidget(labTitle)
-vbox.addWidget(lblPicture)
-vbox.addWidget(lblGuide)
-vbox.addWidget(textBrowser)
-window.setLayout(vbox)
+vbox.addWidget(tab)
 
-btnQuit.clicked.connect(app.quit)  # Завершение выполнения программы
+window.setLayout(vbox)
 
 window.show()
 
