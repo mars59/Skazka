@@ -65,7 +65,28 @@ for name in names:
     p += 1
     button = QtWidgets.QPushButton()
     button.objectName = str(p)
-    button.setIcon(QIcon('Оук.png'))
+    if p == 1:
+        button.setIcon(QIcon('1Az_b.png'))
+    elif p == 2:
+        button.setIcon(QIcon('1Az_kh.png'))
+    elif p == 3:
+        button.setIcon(QIcon('1Az_tyoply.png'))
+    elif p == 4:
+        button.setIcon(QIcon('2Bogi_b.png'))
+    elif p == 5:
+        button.setIcon(QIcon('2Bogi_kh.png'))
+    elif p == 6:
+        button.setIcon(QIcon('2Bogi_t.png'))
+    elif p == 7:
+        button.setIcon(QIcon('3Vedi_b.png'))
+    elif p == 8:
+        button.setIcon(QIcon('3Vedi_kh.png'))
+    elif p == 9:
+        button.setIcon(QIcon('3Vedi_prozr.png'))
+    elif p == 10:
+        button.setIcon(QIcon('3Vedi_t.png'))
+    else:
+        button.setIcon(QIcon('Оук.png'))
     button.setIconSize(QSize(20,20))
     button.setCheckable(True)
     button.setToolTip(name)
