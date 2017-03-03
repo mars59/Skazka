@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #-------------------------------------------------------------------------------
-# Name:        Skazka
+# Name:        Bukva
 # Purpose:
 #
 # Authors:      Марков Сергей, Артём Вишногор, Анастасия Вишногорская
@@ -10,10 +10,7 @@
 # Licence:     Open Source
 #-------------------------------------------------------------------------------
 
-# pyuic5.bat AzbukaWidget.ui -o ui_AzbukaWidget.py
-
-from Bukovica   import *
-# from Personazhi import *
+from Bukovica import *
 
 import sys
 from PyQt5 import QtWidgets, QtCore
@@ -22,7 +19,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.Qt import QSize
 app = QtWidgets.QApplication(sys.argv)  # Создаем объект приложения
 window = QtWidgets.QWidget()  # Создаем объект окна
-window.setWindowTitle("Буквы азбуки Буквица")
+window.setWindowTitle("Изучает буквы азбуки Буквица")
 window.resize(300, 500)  # Задаем минимальные размеры (клиентской области) окна (ширина и высота)
 
 азбука = Азбука()
@@ -58,7 +55,9 @@ class ClassButtonClick():
         if self.num < len(dict)-1:
             textBrowser.append(dict[self.num])
 
-grid = QtWidgets.QGridLayout()
+grid1 = QtWidgets.QVBoxLayout()
+grid2 = QtWidgets.QVBoxLayout()
+grid3 = QtWidgets.QVBoxLayout()
 
 # Создаём список позиций для сетки
 positions = [(i,j) for i in range(7) for j in range(7)]
@@ -78,22 +77,51 @@ for position, name in zip(positions, names):
     # button.resize(button.sizeHint()) # Метод sizeHint() дает рекомендуемый размер для кнопки.
     button.setToolTip(name)
     button.clicked.connect(ClassButtonClick(p))
-    grid.addWidget(button, *position)
+    # grid.addWidget(button, *position)
+    if p < 18:
+        grid1.addWidget(button)
+    elif p < 35:
+        grid2.addWidget(button)
+    else:
+        grid3.addWidget(button)
+
+grid1.addStretch(0)
+grid2.addStretch(0)
+grid3.addStretch(0)
+
+grid = QtWidgets.QHBoxLayout()
+grid.addLayout(grid1)
+grid.addLayout(grid2)
+grid.addLayout(grid3)
 
 btnQuit = QtWidgets.QPushButton("&Закрыть окно", window)  # Создаем объект кнопки; Alt+З - горячая клавиша
-labTitle = QtWidgets.QLabel("<center>Буквы азбуки Буквица")
-pixmap = QPixmap(азбука.файл_c_изображением)
+labTitle = QtWidgets.QLabel("<center>Изображение буквы")
+pixmap = QPixmap('Оук.png')
 lblPicture = QtWidgets.QLabel()
 lblPicture.setPixmap(pixmap)
 lblGuide = QtWidgets.QLabel("<center>Что мы знаем о букве?")
 textBrowser = QtWidgets.QTextBrowser()
 
+DefLayout1 = QtWidgets.QVBoxLayout()
+DefLayout1.addWidget(labTitle)
+DefLayout1.addWidget(lblPicture, stretch=0, alignment=QtCore.Qt.AlignJustify)
+
+DefLayout2 = QtWidgets.QVBoxLayout()
+DefLayout2.addWidget(lblGuide)
+DefLayout2.addWidget(textBrowser)
+
+DefLayout = QtWidgets.QVBoxLayout()
+DefLayout.addLayout(DefLayout1)
+DefLayout.addLayout(DefLayout2)
+
+workLayout = QtWidgets.QHBoxLayout()
+workLayout.addLayout(grid)
+workLayout.addLayout(DefLayout)
+
 vbox = QtWidgets.QVBoxLayout()
 vbox.addWidget(btnQuit)
-vbox.addWidget(labTitle)
-vbox.addLayout(grid)
-vbox.addWidget(lblGuide)
-vbox.addWidget(textBrowser)
+vbox.addLayout(workLayout)
+
 window.setLayout(vbox)
 
 btnQuit.clicked.connect(app.quit)  # Завершение выполнения программы

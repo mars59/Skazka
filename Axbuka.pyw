@@ -27,7 +27,7 @@ window.resize(300, 500)  # Задаем минимальные размеры (�
 
 btnQuit = QtWidgets.QPushButton("&Закрыть окно", window)  # Создаем объект кнопки; Alt+З - горячая клавиша
 labTitle = QtWidgets.QLabel("<center>Азбука Буквица")
-pixmap = QPixmap(азбука.файл_c_изображением)
+pixmap = QPixmap(азбука.файл_c_изображением) # 'Оук.png'
 lblPicture = QtWidgets.QLabel()
 lblPicture.setPixmap(pixmap)
 lblGuide = QtWidgets.QLabel("<center>Что мы знаем об азбуке Буквица?")

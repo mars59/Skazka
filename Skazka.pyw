@@ -19,10 +19,6 @@ window = QtWidgets.QWidget()  # Создаем объект окна
 window.setWindowTitle("Макет программы Сказка. Навигация.")
 window.resize(300, 500)  # Задаем минимальные размеры (клиентской области) окна (ширина и высота)
 
-btnQuit = QtWidgets.QPushButton("&Закрыть окно")  # Создаем объект кнопки; Alt+З - горячая клавиша
-
-btnQuit.clicked.connect(app.quit)  # Завершение выполнения программы
-
 pixmap1 = QPixmap('Азбука.png')
 lblPicture1 = QtWidgets.QLabel()
 lblPicture1.setPixmap(pixmap1)
@@ -41,11 +37,9 @@ tab.addTab(QtWidgets.QLabel("<center>Здесь будет какая-нибуд
 tab.setCurrentIndex(0)
 
 vbox = QtWidgets.QVBoxLayout()
-vbox.addWidget(btnQuit)
 vbox.addWidget(tab)
 
 window.setLayout(vbox)
-
 window.show()
 
 sys.exit(app.exec_())
