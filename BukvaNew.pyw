@@ -85,6 +85,8 @@ for name in names:
         button.setIcon(QIcon('3Vedi_prozr.png'))
     elif p == 10:
         button.setIcon(QIcon('3Vedi_t.png'))
+    elif p == 11:
+        button.setIcon(QIcon('iimOOi5umJI.jpg'))
     else:
         button.setIcon(QIcon('Оук.png'))
     button.setIconSize(QSize(20,20))
