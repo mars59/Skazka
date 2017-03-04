@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #-------------------------------------------------------------------------------
-# Name:        Skazka
-# Purpose:
+# Name:        Bukva
+# Purpose: Изучение рукв алфавита Буквица
 #
 # Authors:      Марков Сергей, Артём Вишногор, Анастасия Вишногорская
 #
@@ -13,7 +13,6 @@
 # pyuic5.bat AzbukaWidget.ui -o ui_AzbukaWidget.py
 
 from Bukovica   import *
-# from Personazhi import *
 
 import sys
 from PyQt5 import QtWidgets, QtCore
@@ -87,7 +86,6 @@ for position, name in zip(positions, names):
     button.clicked.connect(ClassButtonClick(p))
     grid.addWidget(button, *position)
 
-btnQuit = QtWidgets.QPushButton("&Закрыть окно", window)  # Создаем объект кнопки; Alt+З - горячая клавиша
 labTitle = QtWidgets.QLabel("<center>Буквы азбуки Буквица")
 pixmap = QPixmap(азбука.файл_c_изображением)
 lblPicture = QtWidgets.QLabel()
@@ -96,14 +94,11 @@ lblGuide = QtWidgets.QLabel("<center>Что мы знаем о букве?")
 textBrowser = QtWidgets.QTextBrowser()
 
 vbox = QtWidgets.QVBoxLayout()
-vbox.addWidget(btnQuit)
 vbox.addWidget(labTitle)
 vbox.addLayout(grid)
 vbox.addWidget(lblGuide)
 vbox.addWidget(textBrowser)
 window.setLayout(vbox)
-
-btnQuit.clicked.connect(app.quit)  # Завершение выполнения программы
 
 window.show()
 
