@@ -56,6 +56,7 @@ class ClassButtonClick():
         textBrowser.clear()
         if self.num < len(dict)-1:
             textBrowser.append(dict[self.num])
+        lblGuide.setText('Что мы знаем о букве "' + names[self.num] + '"?')
 
 # Считывем имена фвйлов изображений шрифтов в список
 # Обычно если Windows, то слеш \, если Linux, то слеш /
@@ -90,12 +91,17 @@ labTitle = QtWidgets.QLabel("<center>Буквы азбуки Буквица")
 pixmap = QPixmap(азбука.файл_c_изображением)
 lblPicture = QtWidgets.QLabel()
 lblPicture.setPixmap(pixmap)
-lblGuide = QtWidgets.QLabel("<center>Что мы знаем о букве?")
+lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")
+lblGuide.setAlignment(QtCore.Qt.AlignCenter)
 textBrowser = QtWidgets.QTextBrowser()
+
+gridFix = QtWidgets.QHBoxLayout()
+gridFix.addLayout(grid)
+gridFix.addStretch(0)
 
 vbox = QtWidgets.QVBoxLayout()
 vbox.addWidget(labTitle)
-vbox.addLayout(grid)
+vbox.addLayout(gridFix)
 vbox.addWidget(lblGuide)
 vbox.addWidget(textBrowser)
 window.setLayout(vbox)

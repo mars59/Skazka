@@ -54,41 +54,27 @@ class ClassButtonClick():
         textBrowser.clear()
         if self.num < len(dict)-1:
             textBrowser.append(dict[self.num])
+        lblGuide.setText('Что мы знаем о букве "' + names[self.num] + '"?')
 
 grid1 = QtWidgets.QVBoxLayout()
 grid2 = QtWidgets.QVBoxLayout()
 grid3 = QtWidgets.QVBoxLayout()
 
+# Считывем имена фвйлов изображений шрифтов в список
+# Обычно если Windows, то слеш \, если Linux, то слеш /
+fileName = 'images/picture_font.txt'
+listPictureFont = []
+with open(fileName) as file_object:
+    for line in file_object:
+        listPictureFont.append(line.rstrip())
+
 # Создаем и добавляем кнопки в макет
-p = 0
+p = -1
 for name in names:
     p += 1
     button = QtWidgets.QPushButton()
     button.objectName = str(p)
-    if p == 1:
-        button.setIcon(QIcon('1Az_b.png'))
-    elif p == 2:
-        button.setIcon(QIcon('1Az_kh.png'))
-    elif p == 3:
-        button.setIcon(QIcon('1Az_tyoply.png'))
-    elif p == 4:
-        button.setIcon(QIcon('2Bogi_b.png'))
-    elif p == 5:
-        button.setIcon(QIcon('2Bogi_kh.png'))
-    elif p == 6:
-        button.setIcon(QIcon('2Bogi_t.png'))
-    elif p == 7:
-        button.setIcon(QIcon('3Vedi_b.png'))
-    elif p == 8:
-        button.setIcon(QIcon('3Vedi_kh.png'))
-    elif p == 9:
-        button.setIcon(QIcon('3Vedi_prozr.png'))
-    elif p == 10:
-        button.setIcon(QIcon('3Vedi_t.png'))
-    elif p == 11:
-        button.setIcon(QIcon('iimOOi5umJI.jpg'))
-    else:
-        button.setIcon(QIcon('Оук.png'))
+    button.setIcon(QIcon('images/'+listPictureFont[p]))
     button.setIconSize(QSize(20,20))
     button.setCheckable(True)
     button.setToolTip(name)
@@ -114,7 +100,8 @@ labTitle = QtWidgets.QLabel("<center>Изображение буквы")
 pixmap = QPixmap('Оук.png')
 lblPicture = QtWidgets.QLabel()
 lblPicture.setPixmap(pixmap)
-lblGuide = QtWidgets.QLabel("<center>Что мы знаем о букве?")
+lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")
+lblGuide.setAlignment(QtCore.Qt.AlignCenter)
 textBrowser = QtWidgets.QTextBrowser()
 
 DefLayout1 = QtWidgets.QVBoxLayout()
