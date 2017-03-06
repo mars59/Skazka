@@ -113,7 +113,6 @@ for position, name in zip(positions, names):
     grid.addWidget(button, *position)
 
 def SetColorText():
-    print('ok')
     color = QtWidgets.QColorDialog.getColor(
         initial=QtGui.QColor("#ff0000"),
         parent=window, title="Заголовок окна",
@@ -122,11 +121,32 @@ def SetColorText():
         textBrowser.setTextColor(color)
         textBrowser.setText(dict[numButton])
 
+def SetColorFon():
+    color = QtWidgets.QColorDialog.getColor(
+        initial=QtGui.QColor("#ff0000"),
+        parent=window, title="Заголовок окна",
+        options=QtWidgets.QColorDialog.ShowAlphaChannel)
+    if color.isValid():
+        pal = window.palette()
+        pal.setColor(QtGui.QPalette.Normal, QtGui.QPalette.Window, color)
+        pal.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Window, color)
+        window.setPalette(pal)
+
+# def SetFont():
+#     (font, ok) = QtWidgets.QFontDialog.getFont(QtGui.QFont("Tahoma", 16),
+#                                                parent=window, caption="Заголовок окна")
+#     if ok:
+#         print(font.family(), font.pointSize(), font.weight(),
+#               font.italic(), font.underline())
+
 labTitle = QtWidgets.QLabel("<center>Буквы азбуки Буквица")
 lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")
 lblGuide.setAlignment(QtCore.Qt.AlignCenter)
 brnColor = QtWidgets.QPushButton("Цвет текста")
 brnColor.clicked.connect(SetColorText)
+
+btnFonColor = QtWidgets.QPushButton("Цвет фона")
+btnFonColor.clicked.connect(SetColorFon)
 
 gridFix = QtWidgets.QHBoxLayout()
 gridFix.addLayout(grid)
@@ -145,8 +165,16 @@ boxGiudeTitle = QtWidgets.QHBoxLayout()
 boxGiudeTitle.addWidget(lblGuide)
 boxGiudeTitle.addLayout(boxGiudeButton)
 
+boxTitleButton = QtWidgets.QHBoxLayout()
+boxTitleButton.addStretch(0)
+boxTitleButton.addWidget(btnFonColor)
+
+boxTitle = QtWidgets.QHBoxLayout()
+boxTitle.addWidget(labTitle)
+boxTitle.addLayout(boxTitleButton)
+
 vbox = QtWidgets.QVBoxLayout()
-vbox.addWidget(labTitle)
+vbox.addLayout(boxTitle)
 vbox.addLayout(gridAndBukva)
 vbox.addLayout(boxGiudeTitle)
 vbox.addWidget(textBrowser)
