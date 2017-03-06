@@ -12,19 +12,29 @@
 
 # pyuic5.bat AzbukaWidget.ui -o ui_AzbukaWidget.py
 
-from Bukovica   import *
+from Bukovica import *
 
 import sys
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtGui import QIcon
 from PyQt5.Qt import QSize
 app = QtWidgets.QApplication(sys.argv)  # Создаем объект приложения
 window = QtWidgets.QWidget()  # Создаем объект окна
 window.setWindowTitle("Буквы азбуки Буквица")
-window.resize(300, 900)  # Задаем минимальные размеры (клиентской области) окна (ширина и высота)
+ico = QIcon('icon.png') # BukvicaIcon.jpg
+window.setWindowIcon(ico) # Значок окна
+app.setWindowIcon(ico)    # Значок приложения
+window.resize(300, 900)   # Задаем минимальные размеры (клиентской области) окна (ширина и высота)
+
+pal = window.palette()
+pal.setColor(QtGui.QPalette.Normal,   QtGui.QPalette.Window, QtGui.QColor("#618760"))
+pal.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Window, QtGui.QColor("#618760"))
+window.setPalette(pal)
 
 азбука = Азбука()
+
+numButton = 0 # Номер активной кнопки
 
 # Названия кнопок
 names = ['Азъ', 'Боги', 'Веди', 'Глаголи', 'Добро', 'Есть', 'Есмь',
@@ -34,6 +44,19 @@ names = ['Азъ', 'Боги', 'Веди', 'Глаголи', 'Добро', 'Ес
          'Ци', 'Червль', 'Ша', 'Шта', 'Еръ', 'Еры', 'Ерь',
          'Ять', 'Юнь', 'Арь', 'Эдо', 'Ом', 'Енъ', 'Оде',
          'Ёта', 'Ота', 'Кси', 'Пси', 'Фита', 'Ижица', 'Ижа']
+
+folderNamr = 'images1/'
+
+# Считывем имена файлов изображений шрифтов в список
+fileName = folderNamr + 'picture_font.txt'
+listPictureFont = []
+with open(fileName, 'r', encoding='utf-8') as file_object:
+    for line in file_object:
+        listPictureFont.append(line.rstrip())
+
+pixmap = QPixmap(folderNamr + listPictureFont[numButton])
+lblPicture = QtWidgets.QLabel()
+lblPicture.setPixmap(pixmap)
 
 dict = []
 num = -1
@@ -51,24 +74,22 @@ with open('Znachenie_bukvits.txt', 'r', encoding='utf-8') as file_object:
             else:
                 dict[num] = dict[num] + '\n' + s
 
+textBrowser = QtWidgets.QTextBrowser()
+textBrowser.setStyleSheet("background-color: #E6C6XB;")
+textBrowser.setAutoFillBackground(True)
+textBrowser.setTextColor(QtGui.QColor("blue"))
+textBrowser.setText(dict[numButton])
+
 class ClassButtonClick():
     def __init__(self, num = 0):
         self.num = num
     def __call__(self):
-        textBrowser.clear()
-        if self.num < len(dict):
-            textBrowser.append(dict[self.num])
-        lblGuide.setText('Что мы знаем о букве "' + names[self.num] + '"?')
-
-folderNamr = 'images1/'
-# Считывем имена фвйлов изображений шрифтов в список
-# Обычно если Windows, то слеш \, если Linux, то слеш /
-fileName = folderNamr + 'picture_font.txt'
-listPictureFont = []
-with open(fileName, 'r', encoding='utf-8') as file_object:
-    for line in file_object:
-        print(line.rstrip())
-        listPictureFont.append(line.rstrip())
+        numButton = self.num
+        if numButton < len(dict):
+            textBrowser.setText(dict[numButton])
+        lblGuide.setText('Что мы знаем о букве "' + names[numButton] + '"?')
+        pixmap = QPixmap(folderNamr + listPictureFont[numButton])
+        lblPicture.setPixmap(pixmap)
 
 # Матрица кнопок
 grid = QtWidgets.QGridLayout()
@@ -91,22 +112,43 @@ for position, name in zip(positions, names):
     button.clicked.connect(ClassButtonClick(p))
     grid.addWidget(button, *position)
 
+def SetColorText():
+    print('ok')
+    color = QtWidgets.QColorDialog.getColor(
+        initial=QtGui.QColor("#ff0000"),
+        parent=window, title="Заголовок окна",
+        options=QtWidgets.QColorDialog.ShowAlphaChannel)
+    if color.isValid():
+        textBrowser.setTextColor(color)
+        textBrowser.setText(dict[numButton])
+
 labTitle = QtWidgets.QLabel("<center>Буквы азбуки Буквица")
-pixmap = QPixmap(азбука.файл_c_изображением)
-lblPicture = QtWidgets.QLabel()
-lblPicture.setPixmap(pixmap)
 lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")
 lblGuide.setAlignment(QtCore.Qt.AlignCenter)
-textBrowser = QtWidgets.QTextBrowser()
+brnColor = QtWidgets.QPushButton("Цвет текста")
+brnColor.clicked.connect(SetColorText)
 
 gridFix = QtWidgets.QHBoxLayout()
 gridFix.addLayout(grid)
 gridFix.addStretch(0)
 
+gridAndBukva = QtWidgets.QHBoxLayout()
+gridAndBukva.addLayout(gridFix)
+gridAndBukva.addWidget(lblPicture)
+gridAndBukva.addStretch(0)
+
+boxGiudeButton = QtWidgets.QHBoxLayout()
+boxGiudeButton.addStretch(0)
+boxGiudeButton.addWidget(brnColor)
+
+boxGiudeTitle = QtWidgets.QHBoxLayout()
+boxGiudeTitle.addWidget(lblGuide)
+boxGiudeTitle.addLayout(boxGiudeButton)
+
 vbox = QtWidgets.QVBoxLayout()
 vbox.addWidget(labTitle)
-vbox.addLayout(gridFix)
-vbox.addWidget(lblGuide)
+vbox.addLayout(gridAndBukva)
+vbox.addLayout(boxGiudeTitle)
 vbox.addWidget(textBrowser)
 window.setLayout(vbox)
 
