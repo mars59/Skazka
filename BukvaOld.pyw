@@ -19,10 +19,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtGui import QIcon
 from PyQt5.Qt import QSize
+
 app = QtWidgets.QApplication(sys.argv)  # Создаем объект приложения
 window = QtWidgets.QWidget()  # Создаем объект окна
 window.setWindowTitle("Буквы азбуки Буквица")
-ico = QIcon('icon.png') # BukvicaIcon.jpg
+ico = QIcon('icon.png')
 window.setWindowIcon(ico) # Значок окна
 app.setWindowIcon(ico)    # Значок приложения
 window.resize(300, 900)   # Задаем минимальные размеры (клиентской области) окна (ширина и высота)
@@ -75,6 +76,7 @@ with open('Znachenie_bukvits.txt', 'r', encoding='utf-8') as file_object:
                 dict[num] = dict[num] + '\n' + s
 
 textBrowser = QtWidgets.QTextBrowser()
+# textBrowser.setTextBackgroundColor(QtGui.QColor("yellow"))
 textBrowser.setStyleSheet("background-color: #E6C6XB;")
 textBrowser.setAutoFillBackground(True)
 textBrowser.setTextColor(QtGui.QColor("blue"))
@@ -144,11 +146,14 @@ labTitle = QtWidgets.QLabel("<center>Буквы азбуки Буквица")
 lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")
 lblGuide.setAlignment(QtCore.Qt.AlignCenter)
 btnColor = QtWidgets.QPushButton("Цвет текста")
+btnColor.setToolTip('Устававливаем <b>цвет</b> текста с помощью диалогового окна')
 btnColor.clicked.connect(SetColorText)
 btnFont = QtWidgets.QPushButton("Шрифт")
+btnFont.setToolTip('Устававливаем <b>шрифт</b> текста с помощью диалогового окна')
 btnFont.clicked.connect(SetFont)
 
 btnFonColor = QtWidgets.QPushButton("Цвет фона")
+btnFonColor.setToolTip('Устававливаем  цвет <b>фона</b> с помощью диалогового окна')
 btnFonColor.clicked.connect(SetColorFon)
 
 gridFix = QtWidgets.QHBoxLayout()
