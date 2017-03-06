@@ -80,7 +80,7 @@ textBrowser = QtWidgets.QTextBrowser()
 # textBrowser.setTextBackgroundColor(QtGui.QColor("yellow"))
 textBrowser.setStyleSheet("background-color: #E6C6XB;")
 textBrowser.setAutoFillBackground(True)
-textBrowser.setTextColor(QtGui.QColor("blue"))
+textBrowser.setTextColor(QtGui.QColor("#4a0000")) # "blue"
 textBrowser.setText(dict[numButton])
 
 class ClassButtonClick():
@@ -146,16 +146,19 @@ def SetFont():
 labTitle = QtWidgets.QLabel("<center>Буквы азбуки Буквица")
 lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")
 lblGuide.setAlignment(QtCore.Qt.AlignCenter)
-btnColor = QtWidgets.QPushButton("Цвет текста")
-btnColor.setToolTip('Устававливаем <b>цвет</b> текста с помощью диалогового окна')
-btnColor.clicked.connect(SetColorText)
-btnFont = QtWidgets.QPushButton("Шрифт")
-btnFont.setToolTip('Устававливаем <b>шрифт</b> текста с помощью диалогового окна')
-btnFont.clicked.connect(SetFont)
 
-btnFonColor = QtWidgets.QPushButton("Цвет фона")
-btnFonColor.setToolTip('Устававливаем  цвет <b>фона</b> с помощью диалогового окна')
-btnFonColor.clicked.connect(SetColorFon)
+# 1
+# btnColor = QtWidgets.QPushButton("Цвет текста")
+# btnColor.setToolTip('Устававливаем <b>цвет</b> текста с помощью диалогового окна')
+# btnColor.clicked.connect(SetColorText)
+# btnFont = QtWidgets.QPushButton("Шрифт")
+# btnFont.setToolTip('Устававливаем <b>шрифт</b> текста с помощью диалогового окна')
+# btnFont.clicked.connect(SetFont)
+
+# 1
+# btnFonColor = QtWidgets.QPushButton("Цвет фона")
+# btnFonColor.setToolTip('Устававливаем  цвет <b>фона</b> с помощью диалогового окна')
+# btnFonColor.clicked.connect(SetColorFon)
 
 gridFix = QtWidgets.QHBoxLayout()
 gridFix.addLayout(grid)
@@ -166,22 +169,25 @@ gridAndBukva.addLayout(gridFix)
 gridAndBukva.addWidget(lblPicture)
 gridAndBukva.addStretch(0)
 
-boxGiudeButton = QtWidgets.QHBoxLayout()
-boxGiudeButton.addStretch(0)
-boxGiudeButton.addWidget(btnColor)
-boxGiudeButton.addWidget(btnFont)
+# 1
+# boxGiudeButton = QtWidgets.QHBoxLayout()
+# boxGiudeButton.addStretch(0)
+# boxGiudeButton.addWidget(btnColor)
+# boxGiudeButton.addWidget(btnFont)
 
 boxGiudeTitle = QtWidgets.QHBoxLayout()
 boxGiudeTitle.addWidget(lblGuide)
-boxGiudeTitle.addLayout(boxGiudeButton)
+# boxGiudeTitle.addLayout(boxGiudeButton)
 
-boxTitleButton = QtWidgets.QHBoxLayout()
-boxTitleButton.addStretch(0)
-boxTitleButton.addWidget(btnFonColor)
+#
+# boxTitleButton = QtWidgets.QHBoxLayout()
+# boxTitleButton.addStretch(0)
+# boxTitleButton.addWidget(btnFonColor)
 
 boxTitle = QtWidgets.QHBoxLayout()
 boxTitle.addWidget(labTitle)
-boxTitle.addLayout(boxTitleButton)
+# 1
+# boxTitle.addLayout(boxTitleButton)
 
 vbox = QtWidgets.QVBoxLayout()
 vbox.addLayout(boxTitle)
