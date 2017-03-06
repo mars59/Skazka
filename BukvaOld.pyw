@@ -112,19 +112,10 @@ for position, name in zip(positions, names):
     button.clicked.connect(ClassButtonClick(p))
     grid.addWidget(button, *position)
 
-def SetColorText():
-    color = QtWidgets.QColorDialog.getColor(
-        initial=QtGui.QColor("#ff0000"),
-        parent=window, title="Заголовок окна",
-        options=QtWidgets.QColorDialog.ShowAlphaChannel)
-    if color.isValid():
-        textBrowser.setTextColor(color)
-        textBrowser.setText(dict[numButton])
-
 def SetColorFon():
     color = QtWidgets.QColorDialog.getColor(
         initial=QtGui.QColor("#ff0000"),
-        parent=window, title="Заголовок окна",
+        parent=window, title="Выберите фон окна приложения",
         options=QtWidgets.QColorDialog.ShowAlphaChannel)
     if color.isValid():
         pal = window.palette()
@@ -132,9 +123,18 @@ def SetColorFon():
         pal.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Window, color)
         window.setPalette(pal)
 
+def SetColorText():
+    color = QtWidgets.QColorDialog.getColor(
+        initial=QtGui.QColor("#ff0000"),
+        parent=window, title="Выберите цвет текста",
+        options=QtWidgets.QColorDialog.ShowAlphaChannel)
+    if color.isValid():
+        textBrowser.setTextColor(color)
+        textBrowser.setText(dict[numButton])
+
 def SetFont():
-    (font, ok) = QtWidgets.QFontDialog.getFont(QtGui.QFont("Tahoma", 16),
-                                               parent=window, caption="Заголовок окна")
+    (font, ok) = QtWidgets.QFontDialog.getFont(
+        QtGui.QFont("Tahoma", 16), parent=window, caption="Выберите шрифт для текста")
     if ok:
         textBrowser.setFont(font)
         # print(font.family(), font.pointSize(), font.weight(),
