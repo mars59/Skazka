@@ -132,18 +132,21 @@ def SetColorFon():
         pal.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Window, color)
         window.setPalette(pal)
 
-# def SetFont():
-#     (font, ok) = QtWidgets.QFontDialog.getFont(QtGui.QFont("Tahoma", 16),
-#                                                parent=window, caption="Заголовок окна")
-#     if ok:
-#         print(font.family(), font.pointSize(), font.weight(),
-#               font.italic(), font.underline())
+def SetFont():
+    (font, ok) = QtWidgets.QFontDialog.getFont(QtGui.QFont("Tahoma", 16),
+                                               parent=window, caption="Заголовок окна")
+    if ok:
+        textBrowser.setFont(font)
+        # print(font.family(), font.pointSize(), font.weight(),
+        #       font.italic(), font.underline())
 
 labTitle = QtWidgets.QLabel("<center>Буквы азбуки Буквица")
 lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")
 lblGuide.setAlignment(QtCore.Qt.AlignCenter)
-brnColor = QtWidgets.QPushButton("Цвет текста")
-brnColor.clicked.connect(SetColorText)
+btnColor = QtWidgets.QPushButton("Цвет текста")
+btnColor.clicked.connect(SetColorText)
+btnFont = QtWidgets.QPushButton("Шрифт")
+btnFont.clicked.connect(SetFont)
 
 btnFonColor = QtWidgets.QPushButton("Цвет фона")
 btnFonColor.clicked.connect(SetColorFon)
@@ -159,7 +162,8 @@ gridAndBukva.addStretch(0)
 
 boxGiudeButton = QtWidgets.QHBoxLayout()
 boxGiudeButton.addStretch(0)
-boxGiudeButton.addWidget(brnColor)
+boxGiudeButton.addWidget(btnColor)
+boxGiudeButton.addWidget(btnFont)
 
 boxGiudeTitle = QtWidgets.QHBoxLayout()
 boxGiudeTitle.addWidget(lblGuide)
