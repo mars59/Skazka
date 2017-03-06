@@ -38,7 +38,9 @@ num = -1
 with open('Znachenie_bukvits.txt', 'r', encoding='utf-8') as file_object:
     for line in file_object:
         s = line.rstrip()
-        if '***' in s:
+        if s == '':
+            pass
+        elif '***' in s:
             num += 1
             dict.append('')
         else:
@@ -97,7 +99,7 @@ grid.addLayout(grid3)
 
 btnQuit = QtWidgets.QPushButton("&Закрыть окно", window)  # Создаем объект кнопки; Alt+З - горячая клавиша
 labTitle = QtWidgets.QLabel("<center>Изображение буквы")
-pixmap = QPixmap('Оук.png')
+pixmap = QPixmap('images/'+'Оук.png')
 lblPicture = QtWidgets.QLabel()
 lblPicture.setPixmap(pixmap)
 lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")

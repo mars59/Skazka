@@ -40,7 +40,9 @@ num = -1
 with open('Znachenie_bukvits.txt', 'r', encoding='utf-8') as file_object:
     for line in file_object:
         s = line.rstrip()
-        if '***' in s:
+        if s == '':
+            pass
+        elif '***' in s:
             num += 1
             dict.append('')
         else:
@@ -54,16 +56,18 @@ class ClassButtonClick():
         self.num = num
     def __call__(self):
         textBrowser.clear()
-        if self.num < len(dict)-1:
+        if self.num < len(dict):
             textBrowser.append(dict[self.num])
         lblGuide.setText('Что мы знаем о букве "' + names[self.num] + '"?')
 
+folderNamr = 'images1/'
 # Считывем имена фвйлов изображений шрифтов в список
 # Обычно если Windows, то слеш \, если Linux, то слеш /
-fileName = 'images/picture_font.txt'
+fileName = folderNamr + 'picture_font.txt'
 listPictureFont = []
-with open(fileName) as file_object:
+with open(fileName, 'r', encoding='utf-8') as file_object:
     for line in file_object:
+        print(line.rstrip())
         listPictureFont.append(line.rstrip())
 
 # Матрица кнопок
@@ -80,7 +84,7 @@ for position, name in zip(positions, names):
     p += 1
     # s = str(p)
     # button.objectName = s
-    button.setIcon(QIcon('images/'+listPictureFont[p]))
+    button.setIcon(QIcon(folderNamr + listPictureFont[p]))
     button.setIconSize(QSize(40,40))
     button.setCheckable(True)
     button.setToolTip(name)
