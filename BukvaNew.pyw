@@ -99,7 +99,7 @@ grid.addLayout(grid3)
 
 btnQuit = QtWidgets.QPushButton("&Закрыть окно", window)  # Создаем объект кнопки; Alt+З - горячая клавиша
 labTitle = QtWidgets.QLabel("<center>Изображение буквы")
-pixmap = QPixmap('images/'+'Оук.png')
+pixmap = QPixmap('images/'+'1.png')
 lblPicture = QtWidgets.QLabel()
 lblPicture.setPixmap(pixmap)
 lblGuide = QtWidgets.QLabel("Что мы знаем о букве?")

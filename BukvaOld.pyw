@@ -58,6 +58,7 @@ with open(fileName, 'r', encoding='utf-8') as file_object:
 pixmap = QPixmap(folderNamr + listPictureFont[numButton])
 lblPicture = QtWidgets.QLabel()
 lblPicture.setPixmap(pixmap)
+lblPicture.setMargin(10)
 
 dict = []
 num = -1
